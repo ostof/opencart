@@ -33,8 +33,18 @@ class ControllerCommonFileManager extends Controller {
 			$directories = array();
 		}
 
-		// Get files
-		$files = glob($directory . '/' . $filter_name . '*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
+		// Get files -> LF
+        $files_jpg = glob($directory . '/' . $filter_name . '*.jpg', GLOB_ERR);
+        $files_jpeg = glob($directory . '/' . $filter_name . '*.jpeg', GLOB_ERR);
+        $files_png = glob($directory . '/' . $filter_name . '*.png', GLOB_ERR);
+        $files_gif = glob($directory . '/' . $filter_name . '*.gif', GLOB_ERR);
+        $files_JPG = glob($directory . '/' . $filter_name . '*.JPG', GLOB_ERR);
+        $files_JPEG = glob($directory . '/' . $filter_name . '*.JPEG', GLOB_ERR);
+        $files_PNG = glob($directory . '/' . $filter_name . '*.PNG', GLOB_ERR);
+        $files_GIF = glob($directory . '/' . $filter_name . '*.GIF', GLOB_ERR);
+        
+        $files = array_merge($files_jpg, $files_jpeg, $files_png, $files_gif, $files_JPG, $files_JPEG, $files_PNG, $files_GIF);
+
 
 		if (!$files) {
 			$files = array();
